@@ -17,7 +17,7 @@ class CustomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: size.width,
-      height: 250,
+      height: 200,
       child: Stack(children: [
         Container(
           constraints: const BoxConstraints.expand(),

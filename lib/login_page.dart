@@ -57,10 +57,10 @@ class _LoginPageState extends State<LoginPage> {
                               if (value.contains('@') && value.contains('.')) {
                                 return null;
                               } else {
-                                return 'your email must contains @ and .';
+                                return 'Invalid Email';
                               }
                             } else {
-                              return 'Invalid password';
+                              return 'Email required';
                             }
                           },
                           decoration: const InputDecoration(
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                                 return 'Weak password';
                               }
                             } else {
-                              return 'Invalid password';
+                              return 'Password required';
                             }
                           },
                           decoration: const InputDecoration(

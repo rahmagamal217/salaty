@@ -29,90 +29,116 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: timeMap.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView(
-              children: [
-                SizedBox(
-                  height: size.height * 0.4,
-                  width: size.width,
-                  child: Container(
-                    color: const Color.fromRGBO(20, 83, 105, 1),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        DefaultTextStyle(
-                          style: const TextStyle(
-                              fontSize: 30, color: Colors.black),
-                          child: Text(
-                            '${dateMap['day']}',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        DefaultTextStyle(
-                          style: const TextStyle(
-                              fontSize: 30, color: Colors.black),
-                          child: Text(
-                            '${dateMap['date']}',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        DefaultTextStyle(
-                          style: const TextStyle(
-                              fontSize: 30, color: Colors.black),
-                          child: Text(
-                            '${dateMap['month']}',
-                          ),
-                        ),
-                      ],
-                    ),
+    return Scaffold(
+      body: SafeArea(
+        child: timeMap.isEmpty
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Stack(children: [
+                Container(
+                  constraints: const BoxConstraints.expand(),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/night_sky.jpg"),
+                        fit: BoxFit.fill),
                   ),
                 ),
-                CustomContainer(
-                  size: size,
-                  timeMap: timeMap['Fajr'],
-                  image: const AssetImage("assets/images/fajr.jpg"),
-                  title: 'Fajr',
+                ListView(
+                  children: [
+                    SizedBox(
+                      height: size.height * 0.4,
+                      width: size.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          DefaultTextStyle(
+                            style: const TextStyle(
+                              fontSize: 30,
+                              color: Colors.black,
+                            ),
+                            child: Text(
+                              '${dateMap['day']}',
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          DefaultTextStyle(
+                            style: const TextStyle(
+                                fontSize: 30, color: Colors.black),
+                            child: Text(
+                              '${dateMap['date']}',
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          DefaultTextStyle(
+                            style: const TextStyle(
+                                fontSize: 30, color: Colors.black),
+                            child: Text(
+                              '${dateMap['month']}',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    CustomContainer(
+                      size: size,
+                      timeMap: timeMap['Fajr'],
+                      image: const AssetImage("assets/images/fajr.jpg"),
+                      title: 'Fajr',
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    CustomContainer(
+                      size: size,
+                      timeMap: timeMap['Shrouk'],
+                      image: const AssetImage("assets/images/shrouk.jpg"),
+                      title: 'Shrouk',
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    CustomContainer(
+                      size: size,
+                      timeMap: timeMap['Dhuhr'],
+                      image: const AssetImage("assets/images/duhr.jpg"),
+                      title: 'Dhuhr',
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    CustomContainer(
+                      size: size,
+                      timeMap: timeMap['Asr'],
+                      image: const AssetImage("assets/images/asr.jpg"),
+                      title: 'Asr',
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    CustomContainer(
+                      size: size,
+                      timeMap: timeMap['Maghrib'],
+                      image: const AssetImage("assets/images/majrb.jpg"),
+                      title: 'Maghrib',
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    CustomContainer(
+                      size: size,
+                      timeMap: timeMap['Isha'],
+                      image: const AssetImage("assets/images/isha.jpg"),
+                      title: 'Isha',
+                    ),
+                  ],
                 ),
-                CustomContainer(
-                  size: size,
-                  timeMap: timeMap['Shrouk'],
-                  image: const AssetImage("assets/images/shrouk.jpg"),
-                  title: 'Shrouk',
-                ),
-                CustomContainer(
-                  size: size,
-                  timeMap: timeMap['Dhuhr'],
-                  image: const AssetImage("assets/images/duhr.jpg"),
-                  title: 'Dhuhr',
-                ),
-                CustomContainer(
-                  size: size,
-                  timeMap: timeMap['Asr'],
-                  image: const AssetImage("assets/images/asr.jpg"),
-                  title: 'Asr',
-                ),
-                CustomContainer(
-                  size: size,
-                  timeMap: timeMap['Maghrib'],
-                  image: const AssetImage("assets/images/majrb.jpg"),
-                  title: 'Maghrib',
-                ),
-                CustomContainer(
-                  size: size,
-                  timeMap: timeMap['Isha'],
-                  image: const AssetImage("assets/images/isha.jpg"),
-                  title: 'Isha',
-                ),
-              ],
-            ),
+              ]),
+      ),
     );
   }
 
