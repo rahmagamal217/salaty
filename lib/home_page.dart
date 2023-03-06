@@ -31,34 +31,45 @@ class _HomePageState extends State<HomePage> {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: timeMap.isEmpty
-          ? const Center(child: CircularProgressIndicator(),)
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
           : ListView(
               children: [
                 SizedBox(
                   height: size.height * 0.4,
                   width: size.width,
                   child: Container(
-                    color: Colors.deepPurple,
+                    color: const Color.fromRGBO(20, 83, 105, 1),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          '${dateMap['day']}',
-                          style: const TextStyle(fontSize: 30),
+                        DefaultTextStyle(
+                          style: const TextStyle(
+                              fontSize: 30, color: Colors.black),
+                          child: Text(
+                            '${dateMap['day']}',
+                          ),
                         ),
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          '${dateMap['date']}',
-                          style: const TextStyle(fontSize: 30),
+                        DefaultTextStyle(
+                          style: const TextStyle(
+                              fontSize: 30, color: Colors.black),
+                          child: Text(
+                            '${dateMap['date']}',
+                          ),
                         ),
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          '${dateMap['month']}',
-                          style: const TextStyle(fontSize: 30),
+                        DefaultTextStyle(
+                          style: const TextStyle(
+                              fontSize: 30, color: Colors.black),
+                          child: Text(
+                            '${dateMap['month']}',
+                          ),
                         ),
                       ],
                     ),
@@ -68,31 +79,37 @@ class _HomePageState extends State<HomePage> {
                   size: size,
                   timeMap: timeMap['Fajr'],
                   image: const AssetImage("assets/images/fajr.jpg"),
+                  title: 'Fajr',
                 ),
                 CustomContainer(
                   size: size,
                   timeMap: timeMap['Shrouk'],
                   image: const AssetImage("assets/images/shrouk.jpg"),
+                  title: 'Shrouk',
                 ),
                 CustomContainer(
                   size: size,
                   timeMap: timeMap['Dhuhr'],
                   image: const AssetImage("assets/images/duhr.jpg"),
+                  title: 'Dhuhr',
                 ),
                 CustomContainer(
                   size: size,
                   timeMap: timeMap['Asr'],
                   image: const AssetImage("assets/images/asr.jpg"),
+                  title: 'Asr',
                 ),
                 CustomContainer(
                   size: size,
                   timeMap: timeMap['Maghrib'],
                   image: const AssetImage("assets/images/majrb.jpg"),
+                  title: 'Maghrib',
                 ),
                 CustomContainer(
                   size: size,
                   timeMap: timeMap['Isha'],
                   image: const AssetImage("assets/images/isha.jpg"),
+                  title: 'Isha',
                 ),
               ],
             ),
@@ -108,14 +125,16 @@ class _HomePageState extends State<HomePage> {
     var dataList = data['data'];
     var timings = dataList['timings'];
     var dateList = dataList['date'];
-    timeMap['Fajr'] = timings['Fajr'];
-    timeMap['Shrouk'] = timings['Sunrise'];
-    timeMap['Dhuhr'] = timings['Dhuhr'];
-    timeMap['Asr'] = timings['Asr'];
-    timeMap['Maghrib'] = timings['Maghrib'];
-    timeMap['Isha'] = timings['Isha'];
-    dateMap['date'] = dateList['hijri']['date'];
-    dateMap['day'] = dateList['hijri']['weekday']['ar'];
-    dateMap['month'] = dateList['hijri']['month']['ar'];
+    setState(() {
+      timeMap['Fajr'] = timings['Fajr'];
+      timeMap['Shrouk'] = timings['Sunrise'];
+      timeMap['Dhuhr'] = timings['Dhuhr'];
+      timeMap['Asr'] = timings['Asr'];
+      timeMap['Maghrib'] = timings['Maghrib'];
+      timeMap['Isha'] = timings['Isha'];
+      dateMap['date'] = dateList['hijri']['date'];
+      dateMap['day'] = dateList['hijri']['weekday']['ar'];
+      dateMap['month'] = dateList['hijri']['month']['ar'];
+    });
   }
 }
