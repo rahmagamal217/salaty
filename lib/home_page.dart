@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   var differenceBetweenPrayers = [];
   List<String> timeMap = [];
   Map<String, String> dateMap = {};
+  String fajrOfTomorrow = "";
   Duration diff = const Duration();
   String image = "";
   String fajrImage = "assets/images/fajr.jpg";
@@ -38,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     getData();
+    getFajrDate();
     super.initState();
   }
 
@@ -77,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: AlignmentDirectional.bottomCenter,
                       children: [
                         Stack(
-                          alignment: AlignmentDirectional.topCenter,
+                          alignment: AlignmentDirectional.center,
                           children: [
                             SizedBox(
                               height: size.height * 0.70,
@@ -98,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                '${compare()} after ${formatDuration(diff)}',
+                                '${compare()} ${formatDuration(diff)}',
                                 style: const TextStyle(
                                   fontSize: 25,
                                   color: Colors.black,
@@ -215,7 +217,9 @@ class _HomePageState extends State<HomePage> {
         }
       }
       if (now > getDateTime(getDate(timeMap[5])).hour ||
-          now <= getDateTime(getDate(timeMap[0])).hour) {
+          now <= getDateTime(getDate(fajrOfTomorrow)).hour) {
+        diff = getDateTime(getDate(fajrOfTomorrow)).difference(
+            getDateTime(getDate(DateFormat.Hm().format(DateTime.now()))));
         current = pray[0];
       }
     });
@@ -247,6 +251,24 @@ class _HomePageState extends State<HomePage> {
     String hours = duration.inHours.toString().padLeft(0, '2');
     String minutes =
         duration.inMinutes.remainder(60).toString().padLeft(2, '0');
-    return "$hours:$minutes";
+    if (int.parse(hours) < 0 || int.parse(minutes) < 0) {
+      return "was ${int.parse(hours).abs()}:${int.parse(minutes).abs()} ago";
+    } else {
+      return "is after $hours:$minutes";
+    }
+  }
+
+  getFajrDate() async {
+    var now = DateTime.now();
+    var tomorrow = DateTime(now.year, now.month, now.day + 1);
+    var date = DateFormat('DD-MM-YYYY').format(tomorrow);
+    var response = await http.get(
+      Uri.parse(
+          'https://api.aladhan.com/v1/timingsByCity/$date?country=Egypt&city=${widget.city}}'),
+    );
+    var data = jsonDecode(response.body); //convert jason to map
+    var dataList = data['data'];
+    var timings = dataList['timings'];
+    fajrOfTomorrow = timings['Fajr'];
   }
 }
