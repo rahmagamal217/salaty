@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 //import 'package:material_color_generator/material_color_generator.dart';
 import 'login_page.dart';
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Salaty',
+      title:'Salaty',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),

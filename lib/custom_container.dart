@@ -3,49 +3,53 @@ import 'package:flutter/material.dart';
 class CustomContainer extends StatelessWidget {
   const CustomContainer({
     Key? key,
-    required this.size,
-    required this.timeMap,
-    required this.image, required this.title,
+    required this.icon,
+    required this.praynum,
+    required this.pray,
+    required this.praytime,
   }) : super(key: key);
 
-  final Size size;
-  final String? timeMap;
-  final AssetImage image;
-  final String title;
+  final String icon;
+  final String praynum;
+  final String pray;
+  final String praytime;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: size.width,
-      height: 200,
-      child: Stack(children: [
-        Container(
-          constraints: const BoxConstraints.expand(),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(image: image, fit: BoxFit.fill),
-          ),
+      width: 200,
+      height: 170,
+      child: Container(
+        constraints: const BoxConstraints.expand(),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            DefaultTextStyle(
-              style: const TextStyle(color: Colors.black, fontSize: 25),
-              child: Text(
-                '$title :',
-              ),
+            Image.asset(
+              icon,
+              width: 60,
+              height: 50,
             ),
-            Center(
-              child: DefaultTextStyle(
-                style: const TextStyle(color: Colors.black, fontSize: 20),
-                child: Text(
-                  '$timeMap',
-                ),
-              ),
+            Text(
+              'The $praynum prayer time',
+              style: const TextStyle(color: Colors.grey),
+            ),
+            const SizedBox(
+              height: 3,
+            ),
+            Text(
+              '$pray at $praytime',
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25),
             ),
           ],
         ),
-      ]),
+      ),
     );
   }
 }
