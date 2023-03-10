@@ -211,16 +211,34 @@ class _HomePageState extends State<HomePage> {
       for (int i = 0; i < timeMap.length - 1; i++) {
         if (now > getDateTime(getDate(timeMap[i])).hour &&
             now <= getDateTime(getDate(timeMap[i + 1])).hour) {
-          diff = getDateTime(getDate(timeMap[i + 1])).difference(
-              getDateTime(getDate(DateFormat.Hm().format(DateTime.now()))));
-          current = pray[i + 1];
+          if (getDateTime(getDate(timeMap[i + 1])).difference(getDateTime(
+                  getDate(DateFormat.Hm().format(DateTime.now())))) <
+              getDateTime(getDate(timeMap[i])).difference(getDateTime(
+                  getDate(DateFormat.Hm().format(DateTime.now()))))) {
+            diff = getDateTime(getDate(timeMap[i + 1])).difference(
+                getDateTime(getDate(DateFormat.Hm().format(DateTime.now()))));
+            current = pray[i + 1];
+          } else {
+            diff = getDateTime(getDate(timeMap[i])).difference(
+                getDateTime(getDate(DateFormat.Hm().format(DateTime.now()))));
+            current = pray[i];
+          }
         }
       }
       if (now > getDateTime(getDate(timeMap[5])).hour ||
           now <= getDateTime(getDate(fajrOfTomorrow)).hour) {
-        diff = getDateTime(getDate(fajrOfTomorrow)).difference(
-            getDateTime(getDate(DateFormat.Hm().format(DateTime.now()))));
-        current = pray[0];
+        if (getDateTime(getDate(fajrOfTomorrow)).difference(
+                getDateTime(getDate(DateFormat.Hm().format(DateTime.now())))) <
+            getDateTime(getDate(timeMap[5])).difference(
+                getDateTime(getDate(DateFormat.Hm().format(DateTime.now()))))) {
+          diff = getDateTime(getDate(fajrOfTomorrow)).difference(
+              getDateTime(getDate(DateFormat.Hm().format(DateTime.now()))));
+          current = pray[0];
+        } else {
+          diff = getDateTime(getDate(timeMap[5])).difference(
+              getDateTime(getDate(DateFormat.Hm().format(DateTime.now()))));
+          current = pray[5];
+        }
       }
     });
     return current;
